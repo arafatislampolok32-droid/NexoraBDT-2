@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>NexoraBDT - Online Earning Community</title>
+    
+    <!-- External Ad SDK code -->
+    <script src='//libtl.com/sdk.js' data-zone='11079278' data-sdk='show_11079278'></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Beautiful Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        botPink: {
+                            light: '#C5FF66', // Luminous neon green light
+                            DEFAULT: '#00E344', // Active Neon Green
+                            dark: '#00992B', // Forest green accents
+                        },
+                        botOrange: '#7FED08', // Glowing lime yellow accent
+                        appGray: {
+                            light: '#050608', // Sleek deepest black body canvas
+                            DEFAULT: '#10121A', // Carbon tile background
+                            dark: '#4B5563'
+                        }
+                    },
+                    boxShadow: {
+                        premium: '0 8px 32px rgba(0, 227, 68, 0.04)',
+                        floating: '0 10px 25px -4px rgba(0, 227, 68, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050608;
+            color: #FFFFFF;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* Beautiful glowing green headers */
+        .pink-gradient-bg {
+            background: linear-gradient(135deg, #00992B 0%, #00E344 50%, #7FED08 100%);
+        }
+
+        /* Thin subtle border with gradient style */
+        .gradient-border-card {
+            background-color: #10121A;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 20px rgba(0, 227, 68, 0.02);
+            border: 1.5px solid rgba(0, 227, 68, 0.12); /* Green tinted borders */
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gradient-border-card::before {
+            content: '';
+            position: absolute;
+            top: -1.5px; left: -1.5px; right: -1.5px; bottom: -1.5px;
+            background: linear-gradient(135deg, #00992B, #7FED08);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        .gradient-border-card:hover::before {
+            opacity: 0.2;
+        }
+
+        /* Nav link glowing active state */
+        .nav-link.active {
+            color: #FF007A !important;
+        }
+        
+        .nav-link.active i {
+            transform: translateY(-2px);
+            color: #FF007A !important;
+        }
+
+        /* Scale triggers for buttons */
+        .btn-press {
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-press:active {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+
+        /* Page change fades */
+        .page-transition {
+            animation: slideUpFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .zoom-bounce-modal {
+            animation: zoomBounce 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes zoomBounce {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #22c55e33;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="h-full bg-[#050608] flex justify-center items-stretch selection:bg-[#00E344]/20 text-white">
+
+    <!-- Constraints frame to mimic a genuine Android mobile app visual flow -->
+    <div class="w-full max-w-md mx-auto flex flex-col relative bg-[#050608] shadow-2xl border-x border-[#1F2937] h-full overflow-hidden">
+
+        <!-- App Loader -->
+        <div id="loader" class="fixed inset-0 bg-[#050608]/95 backdrop-blur-md flex flex-col items-center justify-center z-50">
+            <div class="relative w-20 h-20 mb-4 flex items-center justify-center">
+                <div class="absolute inset-0 rounded-full border-4 border-[#00E344]/10"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-t-[#00E344] animate-spin"></div>
+                <i data-lucide="sparkles" class="w-8 h-8 text-[#00E344] animate-pulse"></i>
+            </div>
+            <h2 class="text-2xl font-display font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-[#00E344] to-[#7FED08]">NexoraBDT</h2>
+            <p class="text-[11px] text-[#A3E635] mt-2 font-semibold tracking-wider uppercase animate-pulse">Loading secure earning bot...</p>
+        </div>
+
+        <!-- Authentication Section (Dark, Cyberpunk-themed registration & login tabs) -->
+        <div id="auth-section" class="flex-grow p-6 flex flex-col justify-center hidden page-transition overflow-y-auto">
+            <div class="text-center mb-8">
+                <!-- Glowing Logo Emblem -->
+                <div class="w-20 h-20 bg-gradient-to-tr from-[#00992B] to-[#7FED08] rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg shadow-[#00E344]/20 text-white text-3xl font-display font-black border-2 border-white">
+                    N
+                </div>
+                <h1 class="text-4xl font-display font-black tracking-tight text-white leading-none">Nexora<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00E344] to-[#7FED08]">BDT</span></h1>
+                <p class="text-gray-400 text-xs mt-3 uppercase tracking-wider font-extrabold max-w-xs mx-auto">NEXORA BDT ONLINE EARNING COMMUNITY</p>
+            </div>
+
+            <!-- TAB CONTROLLER (Registration first, login second) -->
+            <div class="flex items-center justify-center p-1 bg-[#10121A] rounded-2xl border border-gray-800/80 mb-6">
+                <button id="auth-tab-signup" class="flex-1 py-3.5 text-xs font-black uppercase rounded-xl transition-all duration-300 bg-gradient-to-r from-[#00992B] to-[#00E344] text-white shadow-md">
+                    রেজিস্ট্রেশন (SignUp)
+                </button>
+                <button id="auth-tab-login" class="flex-1 py-3.5 text-xs font-black uppercase rounded-xl transition-all duration-300 text-gray-400 hover:text-white">
+                    লগইন করুন (LogIn)
+                </button>
+            </div>
+
+            <!-- REGISTRATION CONTAINER PANEL (Visible by default) -->
+            <div id="signup-view" class="space-y-4">
+                <div class="bg-[#10121A] rounded-3xl shadow-premium border border-gray-800/60 p-6 space-y-4">
+                    <div class="relative">
+                        <i data-lucide="user" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500"></i>
+                        <input id="signup-name" type="text" placeholder="আপনার পুরো নাম লিখুন" class="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#090A0F] border border-gray-800 focus:border-[#00E344] text-white placeholder-gray-500 focus:outline-none transition-all duration-200 text-sm">
+                    </div>
+                    <div class="relative">
+                        <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500"></i>
+                        <input id="signup-email" type="email" placeholder="ইমেইল অ্যাড্রেস লিখুন" class="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#090A0F] border border-gray-800 focus:border-[#00E344] text-white placeholder-gray-500 focus:outline-none transition-all duration-200 text-sm">
+                    </div>
+                    <div class="relative">
+                        <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500"></i>
+                        <input id="signup-password" type="password" placeholder="নতুন শক্তিশালী পাসওয়ার্ড" class="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#090A0F] border border-gray-800 focus:border-[#00E344] text-white placeholder-gray-500 focus:outline-none transition-all duration-200 text-sm">
+                    </div>
+                    <!-- Invitation reference field -->
+                    <div class="relative">
+                        <i data-lucide="gift" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500"></i>
+                        <input id="signup-referral" type="text" placeholder="আমন্ত্রণ রেফার কোড (ঐচ্ছিক)" class="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#090A0F] border border-gray-800 focus:border-[#00E344] text-white placeholder-gray-500 focus:outline-none transition-all uppercase duration-200 text-sm">
+                    </div>
+                </div>
+                
+                <button id="signup-btn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-[#00992B] via-[#00E344] to-[#7FED08] text-black font-black tracking-wide uppercase shadow-lg shadow-[#00E344]/10 btn-press text-sm mt-3 flex items-center justify-center gap-2">
+                    <i data-lucide="user-plus" class="w-5 h-5"></i> অ্যাকাউন্ট খুলুন
+                </button>
+                <p class="text-center text-gray-400 mt-5 text-xs font-semibold">ইতিমধ্যে একটি অ্যাকাউন্ট আছে? <a href="#" id="go-to-login" class="font-bold text-[#00E344] hover:underline ml-1">লগইন করুন</a></p>
+            </div>
+
+            <!-- LOGIN CONTAINER PANEL (Hidden by default) -->
+            <div id="login-view" class="space-y-4 hidden">
+                <div class="bg-[#10121A] rounded-3xl shadow-premium border border-gray-800/60 p-6 space-y-4">
+                    <div class="relative">
+                        <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500"></i>
+                        <input id="login-email" type="email" placeholder="ইমেইল অ্যাড্রেস" class="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#090A0F] border border-gray-800 focus:border-[#00E344] text-white placeholder-gray-500 focus:outline-none transition-all duration-200 text-sm">
+                    </div>
+                    <div class="relative">
+                        <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500"></i>
+                        <input id="login-password" type="password" placeholder="গোপন পাসওয়ার্ড" class="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#090A0F] border border-gray-800 focus:border-[#00E344] text-white placeholder-gray-500 focus:outline-none transition-all duration-200 text-sm">
+                    </div>
+                </div>
+                
+                <button id="login-btn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-[#00992B] via-[#00E344] to-[#7FED08] text-black font-black tracking-wide uppercase shadow-lg shadow-[#00E344]/15 btn-press text-sm mt-3 flex items-center justify-center gap-2">
+                    <i data-lucide="log-in" class="w-5 h-5"></i> প্রবেশ করুন (LogIn)
+                </button>
+                <p class="text-center text-gray-400 mt-5 text-xs font-semibold">নতুন অ্যাকাউন্ট খুলতে চান? <a href="#" id="go-to-signup" class="font-bold text-[#00E344] hover:underline ml-1">নিবন্ধন করুন</a></p>
+            </div>
+        </div>
+
+        <!-- Main App Container -->
+        <div id="app-container" class="flex-grow flex flex-col hidden page-transition h-full overflow-hidden">
+            
+            <!-- Sticky Header inside lighter UI shell -->
+            <header class="flex items-center justify-between px-5 py-4 bg-[#050608]/90 backdrop-blur-md z-30 border-b border-gray-800/40">
+                <div class="flex items-center space-x-2.5">
+                    <button onclick="navigateTo('menu-page')" class="w-9 h-9 rounded-xl bg-gray-800/50 flex items-center justify-center">
+                        <i data-lucide="menu" class="w-5 h-5 text-white"></i>
+                    </button>
+                    <h1 class="text-xl font-display font-black tracking-tight text-white leading-none">Nexora<span class="text-[#00E344]">BDT</span></h1>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div id="notification-bell" class="relative w-10 h-10 rounded-2xl bg-[#10121A] border border-gray-800/80 flex items-center justify-center cursor-pointer hover:bg-[#12141F] transition-colors shadow-sm">
+                        <i data-lucide="bell" class="w-5 h-5 text-gray-300"></i>
+                        <div id="notification-dot" class="absolute top-2.5 right-2.5 w-2 h-2 bg-rose-500 rounded-full border-2 border-[#10121A] hidden animate-pulse"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Scroll View Pages content -->
+            <main class="flex-grow overflow-y-auto px-4 pt-4 pb-32">
+                
+                <!-- Home Dashboard (Screenshots 1 design theme) -->
+                <div id="home-page" class="space-y-6 hidden">
+                    
+                    <!-- PREMIUM GRADIENT USER COVER BANNER -->
+                    <div class="relative pink-gradient-bg p-5 rounded-[32px] text-white shadow-xl shadow-[#00E344]/5 overflow-hidden group">
+                        <div class="absolute -right-6 -bottom-6 w-38 h-38 bg-white/10 rounded-full blur-2xl group-hover:scale-125 transition-all duration-500"></div>
+                        <div class="absolute -left-6 -top-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+                        <div class="relative flex items-center space-x-4">
+                            <!-- Circular Avatar with premium verified wrap border inside -->
+                            <div class="relative">
+                                <div class="w-[68px] h-[68px] rounded-full bg-white/20 p-1 backdrop-blur-sm border-2 border-white/30">
+                                    <div class="w-full h-full rounded-full bg-black text-[#00E344] font-black flex items-center justify-center text-2xl font-display border border-[#00E344]">
+                                        <span id="header-avatar-letter">N</span>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 right-0 w-6 h-6 bg-black rounded-full flex items-center justify-center shadow-lg border border-[#00E344]">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#00E344] font-black"></i>
+                                </div>
+                            </div>
+                            <!-- Meta stats descriptors -->
+                            <div class="space-y-1">
+                                <div class="flex items-center space-x-1.5">
+                                    <h2 id="profile-name" class="font-display font-extrabold text-lg text-white leading-tight">Welcome</h2>
+                                    <div class="w-4 h-4 bg-white/20 rounded-full flex items-center justify-center text-[8px]" title="Community Star">★</div>
+                                </div>
+                                <p id="profile-username" class="text-xs text-white/80 font-medium">@username</p>
+                                <div class="inline-flex px-2 py-0.5 bg-black/40 rounded-full text-[9px] font-bold uppercase tracking-wider text-white border border-gray-800">
+                                    UID: <span id="profile-uid" class="text-[#00E344]">XXXXXXXX</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FOUR STAT TILES GRID MODULE -->
+                    <div class="grid grid-cols-2 gap-3.5">
+                        <!-- TILE 1: BALANCE -->
+                        <div class="gradient-border-card p-4 rounded-3xl flex flex-col items-center justify-center text-center space-y-1">
+                            <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-[#00E344] mb-1">
+                                <i data-lucide="wallet" class="w-5 h-5"></i>
+                            </div>
+                            <p class="text-[10px] text-gray-400 font-extrabold uppercase tracking-wider">MINE BALANCE</p>
+                            <p class="text-lg font-display font-black text-white leading-none">৳ <span id="coin-balance-taka">0.00</span></p>
+                            <p class="text-[9px] text-[#00E344] font-bold mt-1 bg-emerald-500/5 px-2.5 py-1 rounded-full border border-emerald-500/15"><span id="coin-balance">0</span> Coins</p>
+                        </div>
+
+                        <!-- TILE 2: WITHDRAW -->
+                        <div class="gradient-border-card p-4 rounded-3xl flex flex-col items-center justify-center text-center space-y-1 cursor-pointer" onclick="navigateTo('menu-page')">
+                            <div class="w-10 h-10 rounded-2xl bg-[#7FED08]/10 flex items-[#7FED08] justify-center text-[#7FED08] mb-1">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                            </div>
+                            <p class="text-[10px] text-gray-400 font-extrabold uppercase tracking-wider">WITHDRAWN</p>
+                            <p class="text-lg font-display font-black text-white leading-none">৳ <span id="withdraw-balance-total">0.00</span></p>
+                            <p class="text-[9px] text-gray-400 font-medium mt-1">মোট টাকা উত্তোলিত</p>
+                        </div>
+
+                        <!-- TILE 3: REFER -->
+                        <div class="gradient-border-card p-4 rounded-3xl flex flex-col items-center justify-center text-center space-y-1 cursor-pointer" onclick="navigateTo('refer-page')">
+                            <div class="w-10 h-10 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-1">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                            </div>
+                            <p class="text-[10px] text-gray-400 font-extrabold uppercase tracking-wider">MY TEAM</p>
+                            <p class="text-lg font-display font-black text-white leading-none"><span id="refer-total-count">0</span></p>
+                            <p class="text-[9px] font-bold text-cyan-400 mt-1 bg-cyan-500/5 px-2 py-0.5 rounded-full border border-cyan-500/10">সদস্য আমন্ত্রিত</p>
+                        </div>
+
+                        <!-- TILE 4: BONUS -->
+                        <div class="gradient-border-card p-4 rounded-3xl flex flex-col items-center justify-center text-center space-y-1 cursor-pointer" onclick="navigateTo('task-page')">
+                            <div class="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center text-[#7FED08] mb-1">
+                                <i data-lucide="gift" class="w-5 h-5"></i>
+                            </div>
+                            <p class="text-[10px] text-gray-400 font-extrabold uppercase tracking-wider">REFERRAL TASK</p>
+                            <p class="text-lg font-display font-black text-white leading-none">৳ <span id="earned-bonus-taka">0.00</span></p>
+                            <p class="text-[9px] font-bold text-amber-400 mt-1 bg-amber-500/5 px-2 py-0.5 rounded-full border border-amber-500/10">রেফারেল বোনাস</p>
+                        </div>
+                    </div>
+
+                    <!-- SLIDER CAROUSEL HERO CARD FOR REFERRAL -->
+                    <div class="gradient-border-card p-5 rounded-[32px] overflow-hidden relative group">
+                        <div class="absolute right-3 top-3 w-20 h-20 bg-[#00E344]/5 rounded-full blur-xl"></div>
+                        <div class="flex items-center space-x-4">
+                            <!-- Illustration box in light teal / lime -->
+                            <div class="w-20 h-20 shrink-0 bg-neutral-900 border border-gray-800 rounded-3xl flex items-center justify-center text-3xl">
+                                🤝
+                            </div>
+                            <div class="space-y-1">
+                                <span class="bg-emerald-500/10 text-[#00E344] text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border border-[#00E344]/20">REFER LINK BONUS</span>
+                                <h3 class="text-md font-display font-black text-white">১০০ কয়েন বোনাস নিন</h3>
+                                <p class="text-xs text-gray-400 leading-snug">আপনার বন্ধু আপনার রেফারেল লিংকের মাধ্যমে জয়েন হওয়া মাত্রই পাবে ১০০ কয়েন এবং আপনি পাবেন ৫০ কয়েন বোনাস!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CAMPAIGN NOTIFICATION CARD (Matches screen 1 bottom container) -->
+                    <div class="bg-gradient-to-tr from-[#00992B] to-[#10121A] p-5 rounded-[32px] text-white space-y-3.5 relative overflow-hidden border border-emerald-500/20">
+                        <p class="text-xs font-bold leading-relaxed text-justify">
+                            আপনার বন্ধুদের রেফারেল সিস্টেম লিংকের মাধ্যমে আমন্ত্রণ জানান আর ৫০.০০ কয়েন সরাসরি বোনাস পেয়ে যান! আমন্ত্রিত বন্ধু জয়েন করতেই ১০০ কয়েন পাবেন।
+                        </p>
+                        <div class="flex items-center justify-between pt-1 border-t border-gray-800">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-[#7FED08]">Online Earning Community</span>
+                            <button onclick="navigateTo('refer-page')" class="bg-white text-black font-extrabold text-xs px-4 py-2.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 btn-press">
+                                <i data-lucide="share-2" class="w-3.5 h-3.5 text-black"></i> লিংক কপি করুন
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Daily Tasks (Screen 4 Layout) -->
+                <div id="task-page" class="space-y-6 hidden">
+                    
+                    <!-- Top Pink Heading Banner Card -->
+                    <div class="pink-gradient-bg p-5 rounded-[32px] text-black shadow-xl">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-[50px] h-[50px] rounded-2xl bg-black/20 border border-black/30 flex items-center justify-center text-2xl shadow-sm">
+                                📋
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-display font-black text-black">Daily Ad Earn</h2>
+                                <p class="text-xs text-black/80 mt-0.5 font-bold">সহজ বিজ্ঞাপন দেখুন এবং টাকা আয় করুন!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stat Tile Indicator Blocks for tasks done -->
+                    <div class="bg-[#10121A] rounded-3xl border border-gray-800 p-4 grid grid-cols-3 gap-2.5">
+                        <div class="text-center p-2 rounded-2xl bg-[#090A0F]">
+                            <p class="text-[11px] text-[#00E344] font-black" id="total-tasks-stat">10</p>
+                            <p class="text-[9px] text-gray-400 font-bold mt-0.5 uppercase tracking-wider">রোজ লিমিট</p>
+                        </div>
+                        <div class="text-center p-2 rounded-2xl bg-[#090A0F]">
+                            <p class="text-[11px] text-cyan-400 font-black" id="completed-tasks-stat">0</p>
+                            <p class="text-[9px] text-gray-400 font-bold mt-0.5 uppercase tracking-wider">সম্পন্ন</p>
+                        </div>
+                        <div class="text-center p-2 rounded-2xl bg-[#090A0F]">
+                            <p class="text-[11px] text-[#7FED08] font-black" id="earned-tasks-stat">৳0.00</p>
+                            <p class="text-[9px] text-gray-400 font-bold mt-0.5 uppercase tracking-wider">টাস্ক ইনকাম</p>
+                        </div>
+                    </div>
+
+                    <!-- AVAILABLE TASKS LIST HEADER AND BODY -->
+                    <section class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-md font-display font-extrabold text-white flex items-center gap-1.5">
+                                <span class="w-1 h-4 bg-[#00E344] rounded-full"></span> উপলব্ধ বিজ্ঞাপন
+                            </h3>
+                            <div class="px-2.5 py-1 bg-[#10121A] border border-gray-800 rounded-full text-[9px] text-gray-400 font-bold flex items-center gap-1.5 shadow-sm">
+                                <span class="w-1.5 h-1.5 bg-[#00E344] rounded-full animate-ping"></span>
+                                বাকি কাজ: <span id="tasks-left-counter" class="text-[#00E344] font-extrabold">--</span>
+                            </div>
+                        </div>
+
+                        <!-- Grid representing the tasks matching Screenshot 4 locked system -->
+                        <div class="space-y-3.5">
+                            <!-- Task item card 1 (Short ad Watch) -->
+                            <div class="bg-[#10121A] border border-gray-800 rounded-[28px] p-4 flex items-center justify-between shadow-premium hover:border-[#00E344]/30 transition-all">
+                                <div class="flex items-center space-x-3.5">
+                                    <div class="w-12 h-12 rounded-2xl bg-[#090A0F] border border-gray-850 flex items-center justify-center text-xl">
+                                        📺
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center space-x-1.5">
+                                            <h4 class="font-display font-black text-xs text-white">পপ-আপ বিজ্ঞাপন</h4>
+                                            <span class="text-[8px] bg-emerald-500/10 text-[#00E344] font-black px-1.5 py-0.5 rounded-full uppercase tracking-wider border border-[#00E344]/20">Easy</span>
+                                        </div>
+                                        <p class="text-[11px] text-gray-400 mt-0.5">সহজ বিজ্ঞাপন এবং ইনস্ট্যান্ট জমার কাজ</p>
+                                        <div class="inline-flex px-2 py-0.5 bg-emerald-500/10 text-[#00E344] rounded-full text-[9px] font-bold mt-1.5 border border-[#00E344]/10">
+                                            +৫০ কয়েন রিওয়ার্ড
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="claimReward('popup')" class="bg-gradient-to-r from-[#00992B] to-[#00E344] text-black font-black text-[11px] px-4.5 py-2.5 rounded-xl btn-press tracking-wider">শুরু</button>
+                            </div>
+
+                            <!-- Task item card 2 (Interstitial Ad clips) -->
+                            <div class="bg-[#10121A] border border-gray-800 rounded-[28px] p-4 flex items-center justify-between shadow-premium hover:border-[#00E344]/30 transition-all">
+                                <div class="flex items-center space-x-3.5">
+                                    <div class="w-12 h-12 rounded-2xl bg-[#090A0F] border border-gray-850 flex items-center justify-center text-xl">
+                                        🎥
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center space-x-1.5">
+                                            <h4 class="font-display font-black text-xs text-white">শর্ট এড বিজ্ঞাপন</h4>
+                                            <span class="text-[8px] bg-[#7FED08]/10 text-[#7FED08] font-black px-1.5 py-0.5 rounded-full uppercase tracking-wider border border-[#7FED08]/20">Hot</span>
+                                        </div>
+                                        <p class="text-[11px] text-gray-400 mt-0.5">শুধুমাত্র ৫ সেকেন্ডের একটি শর্ট এড দেখুন</p>
+                                        <div class="inline-flex px-2 py-0.5 bg-emerald-500/10 text-[#00E344] rounded-full text-[9px] font-bold mt-1.5 border border-[#00E344]/10">
+                                            +৫০ কয়েন রিওয়ার্ড
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="claimReward('interstitial')" class="bg-gradient-to-r from-[#00992B] to-[#00E344] text-black font-black text-[11px] px-4.5 py-2.5 rounded-xl btn-press tracking-wider">ক্লেম</button>
+                            </div>
+
+                            <!-- Task item card 3 (In-App Interstitial Video) -->
+                            <div class="bg-[#10121A] border border-gray-800 rounded-[28px] p-4 flex items-center justify-between shadow-premium hover:border-[#00E344]/30 transition-all">
+                                <div class="flex items-center space-x-3.5">
+                                    <div class="w-12 h-12 rounded-2xl bg-[#090A0F] border border-gray-850 flex items-center justify-center text-xl">
+                                        🎬
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center space-x-1.5">
+                                            <h4 class="font-display font-black text-xs text-white">হাই ভিডিও টাস্ক</h4>
+                                            <span class="text-[8px] bg-cyan-500/10 text-cyan-400 font-black px-1.5 py-0.5 rounded-full uppercase tracking-wider border border-cyan-500/20">High</span>
+                                        </div>
+                                        <p class="text-[11px] text-gray-400 mt-0.5">ভিডিও এড প্লে সম্পন্ন করে আর্ন করুন</p>
+                                        <div class="inline-flex px-2 py-0.5 bg-emerald-500/10 text-[#00E344] rounded-full text-[9px] font-bold mt-1.5 border border-[#00E344]/10">
+                                            ভিডিও এড ক্রেডিট
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="claimReward('inApp')" class="bg-gradient-to-r from-[#00992B] to-[#00E344] text-black font-black text-[11px] px-4.5 py-2.5 rounded-xl btn-press tracking-wider">প্লে</button>
+                            </div>
+
+                            <!-- Task item card 4 (Mini game with locked representation - Screenshot 4 layout) -->
+                            <div class="bg-[#10121A] border border-gray-800/80 rounded-[28px] p-4 flex items-center justify-between shadow-sm relative overflow-hidden">
+                                <div class="flex items-center space-x-3.5">
+                                    <div class="w-12 h-12 rounded-2xl bg-[#090A0F] border border-gray-800 flex items-center justify-center text-xl text-gray-400 relative">
+                                        🕹️
+                                        <div class="absolute -right-1 -bottom-1 w-5 h-5 bg-gray-700 rounded-full border-2 border-black flex items-center justify-center text-[10px]">🔒</div>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center space-x-1.5">
+                                            <h4 class="font-display font-black text-xs text-gray-400">মিনি গেম টাস্ক</h4>
+                                            <span class="text-[8px] bg-neutral-800 text-gray-400 font-black px-1.5 py-0.5 rounded-full uppercase tracking-wider border border-gray-700">Locked</span>
+                                        </div>
+                                        <p class="text-[11px] text-gray-400 mt-0.5">মিনি গেম খেলে কয়েন জ্যাকপট জয় করুন!</p>
+                                        <div class="inline-flex px-2 py-0.5 bg-neutral-800 text-gray-400 font-bold text-[9px] mt-1.5 rounded-full">
+                                            ৳১০.০০ রিওয়ার্ড
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="claimReward('miniApp')" class="bg-neutral-800 text-gray-600 font-black text-[11px] px-4 py-2.5 rounded-xl pointer-events-none">খেলুন</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Income History (Screenshot 3 Layout) -->
+                <div id="history-page" class="space-y-6 hidden">
+                    
+                    <!-- Cover Header in hot-pink gradient color -->
+                    <div class="pink-gradient-bg p-5 rounded-[32px] text-black shadow-xl">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-[50px] h-[50px] rounded-2xl bg-black/20 border border-black/30 flex items-center justify-center text-xl shadow-sm">
+                                🕒
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-display font-black">আয়ের ট্রানজেকশন গুচ্ছ</h2>
+                                <p class="text-xs text-black/80 mt-0.5 font-bold">টাকা উত্তোলন (Withdraw) ও দৈনিক আয়ের রিপোর্ট</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Withdrawal Lists or income log updates -->
+                    <section class="space-y-3.5">
+                        <div class="flex justify-between items-center px-1">
+                            <h3 class="text-sm font-display font-bold text-white flex items-center gap-1.5">
+                                <i data-lucide="list-checks" class="w-4.5 h-4.5 text-[#00E344]"></i> ট্রানজেকশন তালিকা
+                            </h3>
+                            <button onclick="loadWithdrawalHistory()" class="text-xs font-bold text-[#00E344] hover:underline flex items-center gap-1">
+                                <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> রিলোড
+                            </button>
+                        </div>
+                        
+                        <div id="withdrawal-history-list" class="space-y-3">
+                            <!-- Populated via javascript -->
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Refer Screen (Screenshot 2 Layout with Referral Link support) -->
+                <div id="refer-page" class="space-y-6 hidden">
+                    
+                    <div class="text-center py-4">
+                        <div class="w-16 h-16 bg-[#00E344]/10 rounded-3xl flex items-center justify-center mx-auto mb-4 border border-[#00E344]/20 shadow-inner">
+                            <i data-lucide="gift" class="w-8 h-8 text-[#00E344]"></i>
+                        </div>
+                        <h2 class="text-2xl font-display font-black text-white">বন্ধুদের আমন্ত্রণ জানান!</h2>
+                        <p class="text-gray-400 text-xs mt-1 font-semibold max-w-sm mx-auto">রেফার লিংক শেয়ার করে বন্ধুদের একাউন্ট করান আর ১০০০ কয়েন পর্যন্ত ব্যালেন্স বাড়ান</p>
+                    </div>
+
+                    <!-- DOTTED REGION WITH REFLINK LIKE SCREENSHOT 2 -->
+                    <div class="bg-[#10121A] border-2 border-gray-800 rounded-3xl p-5 shadow-premium text-center space-y-4">
+                        <p class="text-gray-400 text-[10px] uppercase font-extrabold tracking-widest leading-none">আপনার রেফার লিংক দিয়ে নতুন বন্ধু জয়েন করা মাত্রই পাবেন <span class="text-[#00E344]">৳১০.০০ (১০০ কয়েন)</span> বোনাস!</p>
+                        
+                        <!-- Dotted Link wrap box -->
+                        <div class="bg-[#090A0F] py-3.5 px-5 rounded-2xl border-2 border-dashed border-[#00E344]/20 flex items-center justify-between">
+                            <span id="referral-code" class="text-lg font-display font-black tracking-wider text-[#00E344]">LOADING...</span>
+                            <button id="copy-code-btn" class="w-9 h-9 bg-[#10121A] border border-gray-800 rounded-xl flex items-center justify-center hover:bg-neutral-800 transition-colors btn-press">
+                                <i data-lucide="copy" class="w-4.5 h-4.5 text-[#00E344]"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Strong Green dynamic copy link button -->
+                        <button id="share-btn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-[#00992B] to-[#00E344] text-black font-black tracking-wide uppercase btn-press shadow-lg shadow-[#00E344]/10 flex items-center justify-center gap-2 text-sm leading-none">
+                            <i data-lucide="share-2" class="w-4 h-4"></i> কপি রেফার লিংক
+                        </button>
+                    </div>
+
+                    <!-- RECENT MEMBER SECTION (Screenshot 2 design) -->
+                    <section class="space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-1.5 h-4 bg-[#00E344] rounded-full"></span>
+                            <h3 class="text-md font-display font-extrabold text-white">রিসেন্ট মেম্বার</h3>
+                        </div>
+                        <!-- Container populates recently signed up users -->
+                        <div id="recent-members-list" class="space-y-3">
+                            <!-- Loaded inside dynamic queries -->
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Menu Drawer Screen (Screenshot 1 Layout - Polished Light Theme) -->
+                <div id="menu-page" class="space-y-6 hidden bg-[#F8FAFC] -mx-4 -mt-4 p-5 min-h-full text-slate-800 pb-32 overflow-y-auto">
+                    
+                    <!-- Top header background identical to Profile cover (Screenshot 1 Pink/Purple Gradient) -->
+                    <div class="relative bg-gradient-to-r from-[#FF007A] via-[#E2006A] to-[#8F00FF] p-6 rounded-[28px] text-white shadow-xl overflow-hidden max-w-sm mx-auto">
+                        <!-- Decorative glow bubble -->
+                        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                        
+                        <div class="relative flex items-center space-x-4">
+                            <!-- Avatar with white border -->
+                            <div class="relative w-[72px] h-[72px] rounded-full bg-white/25 p-0.5 backdrop-blur-sm border-2 border-white/80 shadow-md">
+                                <div class="w-full h-full rounded-full bg-[#10121A] text-white font-black flex items-center justify-center text-2xl font-display overflow-hidden">
+                                    <span id="menu-avatar-letter">N</span>
+                                </div>
+                                <!-- Verified badge overlay -->
+                                <div class="absolute bottom-0 right-0 w-5.5 h-5.5 bg-[#00E344] rounded-full border-2 border-white flex items-center justify-center shadow-lg">
+                                    <i data-lucide="check" class="w-3 h-3 text-white stroke-[4px]"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex-grow min-w-0">
+                                <div class="flex items-center space-x-1.5">
+                                    <h2 id="menu-profile-name" class="font-display font-extrabold text-lg text-white truncate leading-none">Guest User</h2>
+                                    <i data-lucide="badge-check" class="w-5 h-5 text-[#00E344] fill-white shrink-0"></i>
+                                </div>
+                                <p id="menu-profile-username" class="text-xs text-white/80 font-medium mt-1 truncate">@user</p>
+                                <div id="menu-profile-uid" class="inline-flex px-3 py-1 bg-white/20 text-white rounded-full text-[9px] font-black mt-2.5 uppercase border border-white/15 backdrop-blur-sm shadow-sm leading-none">UID: XXXXXXXX</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wallet Withdrawal Request Form section with light design -->
+                    <div id="withdraw-section-anchor" class="bg-white rounded-[24px] p-5 shadow-lg space-y-4 border border-slate-100 max-w-sm mx-auto">
+                        <div class="flex items-center space-x-2 font-display font-extrabold text-sm text-[#1E293B]">
+                            <div class="w-8 h-8 rounded-xl bg-pink-500/10 flex items-center justify-center text-[#FF007A]">
+                                <i data-lucide="wallet-cards" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <span>উইথড্রয়াল টাকা উত্তোলন প্যানেল</span>
+                        </div>
+                        
+                        <div class="space-y-3.5">
+                            <div class="grid grid-cols-2 gap-2 text-center text-xs py-2 bg-slate-50 rounded-xl border border-slate-100">
+                                <div>
+                                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-wide">নূন্যতম উত্তোলন</p>
+                                    <p id="wallet-min-info" class="font-bold text-slate-800">5000 Coins</p>
+                                </div>
+                                <div class="border-l border-slate-200">
+                                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-wide">কয়েনের মূল্যমান</p>
+                                    <p id="wallet-value-info" class="font-bold text-[#E2006A]">1000 = ৳10</p>
+                                </div>
+                            </div>
+
+                            <div class="relative">
+                                <i data-lucide="circle-dollar-sign" class="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-400"></i>
+                                <input id="withdraw-amount" type="number" placeholder="কয়েন পরিমাণ প্রবেশ করুন" class="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 focus:border-[#FF007A] text-slate-800 placeholder-slate-400 rounded-xl focus:outline-none transition-all text-sm font-semibold focus:bg-white focus:ring-2 focus:ring-pink-100">
+                            </div>
+                            <div class="relative">
+                                <i data-lucide="credit-card" class="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-400"></i>
+                                <select id="withdraw-method" class="w-full pl-12 pr-10 py-3.5 bg-slate-50 border border-slate-200 focus:border-[#FF007A] text-slate-800 rounded-xl focus:outline-none transition-all appearance-none cursor-pointer text-sm font-semibold focus:bg-white focus:ring-2 focus:ring-pink-100"></select>
+                                <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-400 pointer-events-none"></i>
+                            </div>
+                            
+                            <div id="payment-details-container"></div>
+                            
+                            <button id="withdraw-btn" class="w-full py-4 rounded-xl bg-gradient-to-r from-[#FF007A] via-[#E2006A] to-[#8F00FF] hover:opacity-95 text-white font-black tracking-wide uppercase btn-press shadow-md text-sm leading-none mt-2">
+                                রিকোয়েস্ট সাবমিট করুন
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- MENU OPTION LIST (Matching Screenshot 1 completely in White-Pink Theme) -->
+                    <div class="bg-white rounded-[24px] shadow-lg overflow-hidden divide-y divide-slate-100 border border-slate-100 max-w-sm mx-auto">
+                        <!-- Item 1: Dashboard -->
+                        <div onclick="navigateTo('home-page')" class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-all active:scale-[0.99] duration-155">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF007A] to-[#E2006A] shadow-sm flex items-center justify-center text-white">
+                                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wide">Dashboard</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4.5 h-4.5 text-slate-400"></i>
+                        </div>
+
+                        <!-- Item 2: My Team -->
+                        <div onclick="navigateTo('refer-page')" class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-all active:scale-[0.99] duration-155">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF007A] to-[#E2006A] shadow-sm flex items-center justify-center text-white">
+                                    <i data-lucide="users-2" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wide">My Team</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4.5 h-4.5 text-slate-400"></i>
+                        </div>
+
+                        <!-- Item 3: View Ads & Earn -->
+                        <div onclick="navigateTo('task-page')" class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-all active:scale-[0.99] duration-155">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF007A] to-[#E2006A] shadow-sm flex items-center justify-center text-white">
+                                    <i data-lucide="play-circle" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wide">View Ads & Earn</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4.5 h-4.5 text-slate-400"></i>
+                        </div>
+
+                        <!-- Item 4: Ads Earn History -->
+                        <div onclick="navigateTo('history-page')" class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-all active:scale-[0.99] duration-155">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF007A] to-[#E2006A] shadow-sm flex items-center justify-center text-white">
+                                    <i data-lucide="history" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wide">Ads Earn History</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4.5 h-4.5 text-slate-400"></i>
+                        </div>
+
+                        <!-- Item 5: Daily Task & Earn -->
+                        <div onclick="navigateTo('task-page')" class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-all active:scale-[0.99] duration-155">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF007A] to-[#E2006A] shadow-sm flex items-center justify-center text-white">
+                                    <i data-lucide="list-checks" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wide">Daily Task & Earn</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4.5 h-4.5 text-slate-400"></i>
+                        </div>
+
+                        <!-- Item 6: Daily Task History -->
+                        <div onclick="navigateTo('history-page')" class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-all active:scale-[0.99] duration-155">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF007A] to-[#E2006A] shadow-sm flex items-center justify-center text-white">
+                                    <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wide">Daily Task History</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4.5 h-4.5 text-slate-400"></i>
+                        </div>
+
+                        <!-- Item 7: Withdraw -->
+                        <div onclick="document.getElementById('withdraw-section-anchor').scrollIntoView({behavior: 'smooth'})" class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-all active:scale-[0.99] duration-155">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF007A] to-[#E2006A] shadow-sm flex items-center justify-center text-white">
+                                    <i data-lucide="banknote" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wide">Withdraw</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4.5 h-4.5 text-slate-400"></i>
+                        </div>
+
+                        <!-- Item 8: Withdraw History -->
+                        <div onclick="navigateTo('history-page')" class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-all active:scale-[0.99] duration-155">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF007A] to-[#E2006A] shadow-sm flex items-center justify-center text-white">
+                                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wide">Withdraw History</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4.5 h-4.5 text-slate-400"></i>
+                        </div>
+
+                        <!-- Extra: Telegram Support Join -->
+                        <a href="https://t.me/NexoraBDT/" target="_blank" class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-all active:scale-[0.99] duration-155">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-10 h-10 rounded-2xl bg-indigo-505 bg-indigo-500/15 shadow-sm flex items-center justify-center text-indigo-600">
+                                    <i data-lucide="send" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wide">Telegram Support Group</span>
+                            </div>
+                            <span class="text-[9px] bg-emerald-500/10 text-[#00992B] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-500/20">যোগ দিন</span>
+                        </a>
+                    </div>
+
+                    <button id="logout-btn" class="w-full py-4 rounded-[20px] bg-rose-500/5 border border-rose-500/20 hover:bg-rose-500 hover:text-white text-rose-500 font-extrabold tracking-wider uppercase transition-all duration-200 btn-press text-xs max-w-sm mx-auto block">
+                        লগ-আউট করুন
+                    </button>
+                </div>
+                
+                <!-- Notification logs list wrapper page -->
+                <div id="notifications-page" class="space-y-4 hidden">
+                    <h2 class="text-md font-display font-extrabold text-white flex items-center gap-1.5 px-1">
+                        <i data-lucide="bell-ring" class="w-5 h-5 text-[#00E344]"></i> নোটিফিকেশন সেন্টার
+                    </h2>
+                    <div id="notifications-list" class="space-y-3"></div>
+                </div>
+            </main>
+
+            <!-- GORGEOUS ELEVATED FLOATING BOTTOM NAVIGATION BAR (Mimicking screenshots completely) -->
+            <nav class="absolute bottom-0 left-0 right-0 flex justify-center z-40 bg-[#050608]/95 border-t border-gray-800/60 backdrop-blur-md pb-safe">
+                <div class="w-full max-w-md grid grid-cols-5 items-center text-center py-2 relative px-1">
+                    
+                    <!-- TAB 1: HISTORY -->
+                    <a href="#" class="nav-link flex flex-col items-center space-y-1 text-gray-500 font-bold btn-press" data-page="history-page">
+                        <i data-lucide="history" class="w-5 h-5 transition-transform duration-200"></i>
+                        <span class="text-[9px]">HISTORY</span>
+                    </a>
+                    
+                    <!-- TAB 2: TASK -->
+                    <a href="#" class="nav-link flex flex-col items-center space-y-1 text-gray-500 font-bold btn-press" data-page="task-page">
+                        <i data-lucide="list-todo" class="w-5 h-5 transition-transform duration-200"></i>
+                        <span class="text-[9px]">TASK</span>
+                    </a>
+                    
+                    <!-- CENTER TAB 3: HOME (Floating heavy circle ring in green) -->
+                    <div class="flex justify-center -mt-6">
+                        <a href="#" class="nav-link relative z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#10121A] shadow-floating border-[3px] border-[#00E344] flex-col text-[#00E344] transition-transform hover:scale-105 btn-press" data-page="home-page" id="center-nav-home">
+                            <i data-lucide="home" class="w-6 h-6 text-[#00E344]"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- TAB 4: TAP COIN / INVITE -->
+                    <a href="#" class="nav-link flex flex-col items-center space-y-1 text-gray-500 font-bold btn-press" data-page="refer-page">
+                        <i data-lucide="eye" class="w-5 h-5 transition-transform duration-200"></i>
+                        <span class="text-[9px]">TAP COIN</span>
+                    </a>
+                    
+                    <!-- TAB 5: MENU -->
+                    <a href="#" class="nav-link flex flex-col items-center space-y-1 text-gray-500 font-bold btn-press" data-page="menu-page">
+                        <i data-lucide="menu" class="w-5 h-5 transition-transform duration-200"></i>
+                        <span class="text-[9px]">MENU</span>
+                    </a>
+                    
+                </div>
+            </nav>
+        </div>
+        
+        <!-- High Fidelity Dialog Alert Modal (No ugly platform native popups) -->
+        <div id="custom-alert" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-5">
+            <div class="bg-[#10121A] rounded-3xl p-6 w-full max-w-xs text-center border border-gray-800 shadow-2xl zoom-bounce-modal">
+                <div id="alert-icon-container" class="w-14 h-14 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i id="alert-icon" data-lucide="info" class="w-7 h-7 text-[#00E344]"></i>
+                </div>
+                <p id="alert-message" class="text-white text-sm font-extrabold leading-relaxed mb-5"></p>
+                <button id="alert-ok-btn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#00992B] to-[#00E344] text-black font-black tracking-wide uppercase btn-press shadow-md">ওকে</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        const firebaseConfig = {
+          apiKey: "AIzaSyBf0bEeGEgdr3A4yc-XymgKlrxyKU2k5Ss",
+          authDomain: "nexorabdt-earning-bot.firebaseapp.com",
+          databaseURL: "https://nexorabdt-earning-bot-default-rtdb.firebaseio.com",
+          projectId: "nexorabdt-earning-bot",
+          storageBucket: "nexorabdt-earning-bot.firebasestorage.app",
+          messagingSenderId: "1087790591292",
+          appId: "1:1087790591292:web:163719b84c868dc6bf4239"
+        };
+        
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, serverTimestamp, query, where, getDocs, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+        let userData = null;
+        let appConfig = {};
+
+        const loader = document.getElementById('loader');
+        const coinBalanceEl = document.getElementById('coin-balance');
+        const coinBalanceTakaEl = document.getElementById('coin-balance-taka');
+        const profileNameEl = document.getElementById('profile-name');
+        const profileUsernameEl = document.getElementById('profile-username');
+        const profileUidEl = document.getElementById('profile-uid');
+        const headerAvatarLetterEl = document.getElementById('header-avatar-letter');
+        
+        const menuProfileNameEl = document.getElementById('menu-profile-name');
+        const menuProfileEmailEl = document.getElementById('menu-profile-email');
+        const menuProfileUidEl = document.getElementById('menu-profile-uid');
+        const menuAvatarLetterEl = document.getElementById('menu-avatar-letter');
+
+        const referTotalCountEl = document.getElementById('refer-total-count');
+        const withdrawBalanceTotalEl = document.getElementById('withdraw-balance-total');
+        const earnedBonusTakaEl = document.getElementById('earned-bonus-taka');
+
+        const referralCodeEl = document.getElementById('referral-code');
+        const walletMinInfoEl = document.getElementById('wallet-min-info');
+        const walletValueInfoEl = document.getElementById('wallet-value-info');
+        const withdrawMethodSelect = document.getElementById('withdraw-method');
+        const notificationDot = document.getElementById('notification-dot');
+        const paymentDetailsContainer = document.getElementById('payment-details-container');
+        
+        // Task system labels
+        const totalTasksStatEl = document.getElementById('total-tasks-stat');
+        const completedTasksStatEl = document.getElementById('completed-tasks-stat');
+        const earnedTasksStatEl = document.getElementById('earned-tasks-stat');
+        const tasksLeftCounterEl = document.getElementById('tasks-left-counter');
+
+        async function checkTelegramAuthAndAutoLogin() {
+            if (window.Telegram && window.Telegram.WebApp) {
+                try {
+                    window.Telegram.WebApp.ready();
+                    window.Telegram.WebApp.expand();
+                } catch(e) {
+                    console.log("Telegram ready/expand error:", e);
+                }
+                
+                const initData = window.Telegram.WebApp.initDataUnsafe;
+                if (initData && initData.user) {
+                    const tgUser = initData.user;
+                    console.log("Telegram user model detected:", tgUser);
+                    
+                    const loaderText = document.querySelector('#loader p');
+                    if (loaderText) {
+                        loaderText.innerText = "টেলিগ্রাম অ্যাকাউন্টের মাধ্যমে যুক্ত করা হচ্ছে...";
+                    }
+                    loader.style.display = 'flex';
+                    
+                    const tgEmail = `tg_${tgUser.id}@nexorabdt.tg`;
+                    const tgPassword = `tg_pass_${tgUser.id}`;
+                    
+                    let finalReferredByCode = null;
+                    if (initData.start_param) {
+                        const tgRefCode = initData.start_param.trim().toUpperCase();
+                        if (tgRefCode) {
+                            localStorage.setItem('pending_referral_code', tgRefCode);
+                            finalReferredByCode = tgRefCode;
+                        }
+                    }
+                    
+                    try {
+                        await signInWithEmailAndPassword(auth, tgEmail, tgPassword);
+                        console.log("Telegram auto-login successful for email:", tgEmail);
+                    } catch (loginError) {
+                        if (loginError.code === 'auth/user-not-found' || loginError.code === 'auth/invalid-credential' || loginError.code === 'auth/wrong-password') {
+                            console.log("Telegram account not found in database, generating new user details...");
+                            try {
+                                const userCredential = await createUserWithEmailAndPassword(auth, tgEmail, tgPassword);
+                                const ownReferralCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+                                
+                                let chosenReferrerCode = finalReferredByCode || localStorage.getItem('pending_referral_code') || '';
+                                let verifiedReferrer = null;
+                                if (chosenReferrerCode) {
+                                    const q = query(collection(db, "users"), where("referralCode", "==", chosenReferrerCode));
+                                    const querySnapshot = await getDocs(q);
+                                    if (!querySnapshot.empty) {
+                                        verifiedReferrer = chosenReferrerCode;
+                                    }
+                                }
+                                
+                                const initialSum = verifiedReferrer ? 100 : 50;
+                                const defaultUserData = {
+                                    uid: userCredential.user.uid,
+                                    name: tgUser.first_name + (tgUser.last_name ? " " + tgUser.last_name : ""),
+                                    email: tgEmail,
+                                    balance: initialSum,
+                                    referralCode: ownReferralCode,
+                                    referredBy: verifiedReferrer,
+                                    deviceId: "tg_" + tgUser.id,
+                                    lastNotificationCheck: new Date(),
+                                    createdAt: serverTimestamp(),
+                                    dailyAdCount: 0,
+                                    lastAdWatchDate: new Date().toISOString().split('T')[0],
+                                    isBlocked: false
+                                };
+                                
+                                const userRef = doc(db, "users", userCredential.user.uid);
+                                await setDoc(userRef, defaultUserData);
+                                
+                                if (verifiedReferrer) {
+                                    const qReferrer = query(collection(db, "users"), where("referralCode", "==", verifiedReferrer));
+                                    const referrerSnap = await getDocs(qReferrer);
+                                    if (!referrerSnap.empty) {
+                                        const referrerDoc = referrerSnap.docs[0];
+                                        const referrerRef = doc(db, "users", referrerDoc.id);
+                                        const referrerData = referrerDoc.data();
+                                        await updateDoc(referrerRef, {
+                                            balance: (referrerData.balance || 0) + 50
+                                        });
+                                    }
+                                    localStorage.removeItem('pending_referral_code');
+                                }
+                                console.log("Telegram client auto-signup successful.", userCredential.user.uid);
+                            } catch (signupError) {
+                                console.error("Telegram self auto-signup failed:", signupError);
+                                showDialogAlert("টেলিগ্রাম অ্যাকাউন্টের মাধ্যমে সাইনআপ ব্যর্থ হয়েছে: " + signupError.message, "error");
+                            }
+                        } else {
+                            console.error("Telegram login logic failed:", loginError);
+                            showDialogAlert("টেলিগ্রাম দিয়ে সংযোগ স্থাপনে ব্যর্থ: " + loginError.message, "error");
+                        }
+                    }
+                }
+            }
+        }
+
+        window.onload = async () => {
+            // Check for referral parameters in query string
+            const urlParams = new URLSearchParams(window.location.search);
+            let refCode = urlParams.get('ref');
+            if (!refCode && window.location.hash) {
+                const hashQuery = window.location.hash.split('?')[1];
+                if (hashQuery) {
+                    const hashParams = new URLSearchParams(hashQuery);
+                    refCode = hashParams.get('ref');
+                }
+            }
+            if (refCode) {
+                const cleanedRef = refCode.trim().toUpperCase();
+                localStorage.setItem('pending_referral_code', cleanedRef);
+                // Pre-fill input in signup form if element exists
+                const refField = document.getElementById('signup-referral');
+                if (refField) refField.value = cleanedRef;
+            }
+
+            lucide.createIcons();
+            setupEventListeners();
+            showMainPage('auth-section');
+            
+            let handledByTelegram = false;
+            if (window.Telegram && window.Telegram.WebApp) {
+                try {
+                    const initData = window.Telegram.WebApp.initDataUnsafe;
+                    if (initData && initData.user) {
+                        handledByTelegram = true;
+                    }
+                } catch (e) {
+                    console.log("Telegram init detection failed:", e);
+                }
+            }
+            
+            if (handledByTelegram) {
+                await checkTelegramAuthAndAutoLogin();
+            } else {
+                loader.style.display = 'none';
+            }
+            
+            onAuthStateChanged(auth, handleAuthStateChange);
+        };
+
+        async function handleAuthStateChange(user) {
+            try {
+                let isTg = false;
+                if (window.Telegram && window.Telegram.WebApp) {
+                    try {
+                        const initData = window.Telegram.WebApp.initDataUnsafe;
+                        if (initData && initData.user) {
+                            isTg = true;
+                        }
+                    } catch (e) {}
+                }
+
+                if (user) {
+                    loader.style.display = 'flex';
+                    currentUser = user;
+                    await fetchUserData();
+                    if (!userData) {
+                        showDialogAlert("ইউজার ডাটা লোড করতে ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।", "error");
+                        await signOut(auth);
+                        loader.style.display = 'none';
+                        return;
+                    }
+                    if (userData.isBlocked) {
+                        showDialogAlert("আপনার অ্যাকাউন্টটি ব্লক করা হয়েছে।", "error");
+                        await signOut(auth);
+                        loader.style.display = 'none';
+                        return;
+                    }
+                    await fetchAppConfig();
+                    await checkNewNotifications();
+                    try {
+                        updateUI();
+                    } catch (uiErr) {
+                        console.error("Error updating UI:", uiErr);
+                    }
+                    await populateStatsAndRefList();
+                    showMainPage('app-container');
+                    navigateTo('home-page');
+                    loader.style.display = 'none';
+
+                    // If in telegram web app, hide the logout button completely to prevent multi-accounts or bypass
+                    const logoutBtn = document.getElementById('logout-btn');
+                    if (logoutBtn) {
+                        if (isTg) {
+                            logoutBtn.classList.add('hidden');
+                        } else {
+                            logoutBtn.classList.remove('hidden');
+                        }
+                    }
+                } else {
+                    currentUser = null;
+                    userData = null;
+                    if (isTg) {
+                        // Re-trigger auto-login instead of showing auth form
+                        await checkTelegramAuthAndAutoLogin();
+                    } else {
+                        showMainPage('auth-section');
+                        loader.style.display = 'none';
+                    }
+                }
+            } catch (authChangeErr) {
+                console.error("Exception in auth state change:", authChangeErr);
+                loader.style.display = 'none';
+            }
+        }
+
+        async function fetchUserData() {
+            if (!currentUser) return;
+            const userRef = doc(db, "users", currentUser.uid);
+            try {
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    userData = userSnap.data();
+                    // Guarantee consistency of all critical elements
+                    let needsSyncUpdate = false;
+                    const syncData = {};
+                    if (!userData.referralCode) {
+                        syncData.referralCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+                        userData.referralCode = syncData.referralCode;
+                        needsSyncUpdate = true;
+                    }
+                    if (userData.balance === undefined) {
+                        syncData.balance = 50;
+                        userData.balance = 50;
+                        needsSyncUpdate = true;
+                    }
+                    if (needsSyncUpdate) {
+                        await updateDoc(userRef, syncData);
+                    }
+                } else {
+                    // Create defaults safely
+                    const ownReferralCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+                    const pendingLinkRef = localStorage.getItem('pending_referral_code') || null;
+                    const initialBalance = pendingLinkRef ? 100 : 50;
+
+                    const defaultUserData = {
+                        uid: currentUser.uid, 
+                        name: currentUser.displayName || currentUser.email.split('@')[0], 
+                        email: currentUser.email,
+                        balance: initialBalance, 
+                        referralCode: ownReferralCode, 
+                        referredBy: pendingLinkRef,
+                        lastNotificationCheck: new Date(),
+                        createdAt: serverTimestamp(),
+                        dailyAdCount: 0, 
+                        lastAdWatchDate: new Date().toISOString().split('T')[0], 
+                        isBlocked: false
+                    };
+                    await setDoc(userRef, defaultUserData);
+                    userData = defaultUserData;
+
+                    if (pendingLinkRef) {
+                        // Reward referrer immediately with 50 coins
+                        const qReferrer = query(collection(db, "users"), where("referralCode", "==", pendingLinkRef));
+                        const referrerSnap = await getDocs(qReferrer);
+                        if (!referrerSnap.empty) {
+                            const referrerDoc = referrerSnap.docs[0];
+                            const referrerRef = doc(db, "users", referrerDoc.id);
+                            const referrerData = referrerDoc.data();
+                            await updateDoc(referrerRef, { 
+                                balance: (referrerData.balance || 0) + 50 
+                            });
+                        }
+                        localStorage.removeItem('pending_referral_code');
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+                showDialogAlert("ইউজার ডাটা লোড করতে সমস্যা হয়েছে।", "error");
+            }
+        }
+
+        async function fetchAppConfig() {
+            const configRef = doc(db, "config", "main");
+            try {
+                const configSnap = await getDoc(configRef);
+                appConfig = configSnap.exists() ? configSnap.data() : { minWithdrawal: 5000, paymentMethods: ["UPI", "bKash"], dailyAdLimit: 10, coinValueCoins: 1000, coinValueInr: 10 };
+            } catch (error) {
+                console.error("Error fetching app config:", error);
+            }
+        }
+        
+        function updateUI() {
+            if (!userData) return;
+            const balance = userData.balance || 0;
+            const coinPrice = appConfig.coinValueCoins || 1000;
+            const currencyVal = appConfig.coinValueInr || 10;
+            const balanceInTaka = ((balance / coinPrice) * currencyVal).toFixed(2);
+            
+            coinBalanceEl.textContent = balance;
+            coinBalanceTakaEl.textContent = balanceInTaka;
+            
+            // Task calculations
+            const todayEarnedTaka = ((userData.dailyAdCount || 0) * 0.50).toFixed(2);
+            if(completedTasksStatEl) completedTasksStatEl.textContent = userData.dailyAdCount || 0;
+            if(earnedTasksStatEl) earnedTasksStatEl.textContent = `৳${todayEarnedTaka}`;
+            
+            const firstLetter = userData.name ? userData.name.charAt(0).toUpperCase() : 'N';
+            if (headerAvatarLetterEl) headerAvatarLetterEl.textContent = firstLetter;
+            if (menuAvatarLetterEl) menuAvatarLetterEl.textContent = firstLetter;
+            
+            profileNameEl.textContent = userData.name || 'Anonymous User';
+            profileUsernameEl.textContent = `@${userData.email ? userData.email.split('@')[0] : 'user'}`;
+            profileUidEl.textContent = userData.uid ? userData.uid.substring(0, 8).toUpperCase() : 'XXXXXXXX';
+
+            menuProfileNameEl.textContent = userData.name || 'Anonymous User';
+            menuProfileEmailEl.textContent = userData.email || 'user@email.com';
+            menuProfileUidEl.textContent = `UID: ${userData.uid ? userData.uid.substring(0, 8).toUpperCase() : 'XXXXXXXX'}`;
+            const menuUsernameEl = document.getElementById('menu-profile-username');
+            if (menuUsernameEl) {
+                menuUsernameEl.textContent = `@${userData.email ? userData.email.split('@')[0] : 'user'}`;
+            }
+
+            const botUsername = appConfig.telegramBotUsername || 'nexorabdt_bot';
+            if (referralCodeEl) {
+                referralCodeEl.textContent = `t.me/${botUsername}?start=${userData.referralCode || '...'}`;
+                referralCodeEl.className = "text-xs font-semibold tracking-wide text-[#00E344] truncate select-all mr-2";
+            }
+            
+            if (walletMinInfoEl) walletMinInfoEl.textContent = `${appConfig.minWithdrawal || 5000} Coins`;
+            if (walletValueInfoEl) walletValueInfoEl.textContent = `${appConfig.coinValueCoins || 1000} = ৳${appConfig.coinValueInr || 10}`;
+            
+            withdrawMethodSelect.innerHTML = '';
+            (appConfig.paymentMethods || []).forEach(method => {
+                const option = document.createElement('option');
+                option.value = method;
+                option.textContent = method;
+                withdrawMethodSelect.appendChild(option);
+            });
+            updateDynamicPaymentFields();
+            updateAdsLeftCount();
+        }
+
+        async function populateStatsAndRefList() {
+            if(!currentUser || !userData) return;
+            try {
+                // Fetch referrals size
+                const qReferrals = query(collection(db, "users"), where("referredBy", "==", userData.referralCode));
+                const refSnap = await getDocs(qReferrals);
+                const count = refSnap.size;
+                referTotalCountEl.textContent = count;
+                
+                // Referral calculated bonus Taka inside tile (50 coins reward per refer = 4 Taka equivalent)
+                earnedBonusTakaEl.textContent = (count * 0.50).toFixed(2);
+                
+                // Fetch approved withdrawal sum
+                const qWithdraw = query(collection(db, "withdrawals"), where("userId", "==", currentUser.uid), where("status", "==", "approved"));
+                const withSnap = await getDocs(qWithdraw);
+                let totalWithAmount = 0;
+                withSnap.forEach(doc => {
+                    totalWithAmount += doc.data().amount || 0;
+                });
+                const coinPrice = appConfig.coinValueCoins || 1000;
+                const currencyVal = appConfig.coinValueInr || 10;
+                const totalWithTaka = ((totalWithAmount / coinPrice) * currencyVal).toFixed(2);
+                withdrawBalanceTotalEl.textContent = totalWithTaka;
+
+            } catch (e) {
+                console.error("Error populating dynamic summary stats: ", e);
+            }
+        }
+
+        function updateAdsLeftCount() {
+            const today = new Date().toISOString().split('T')[0];
+            if (userData.lastAdWatchDate !== today) {
+                userData.dailyAdCount = 0;
+            }
+            const adLimit = appConfig.dailyAdLimit || 10;
+            const adsLeft = Math.max(0, adLimit - userData.dailyAdCount);
+            
+            if (tasksLeftCounterEl) tasksLeftCounterEl.textContent = adsLeft;
+            if (totalTasksStatEl) totalTasksStatEl.textContent = adLimit;
+        }
+
+        function updateDynamicPaymentFields() {
+            const selectedMethod = withdrawMethodSelect.value ? withdrawMethodSelect.value.toLowerCase() : '';
+            let placeholder = "পেমেন্ট বিবরন লিখুন";
+            let typeIcon = "circle-user";
+            
+            if (selectedMethod.includes('upi')) {
+                placeholder = "আপনার UPI আইডি দিন";
+                typeIcon = "credit-card";
+            } else if (selectedMethod.includes('bkash')) {
+                placeholder = "আপনার bKash নাম্বার দিন";
+                typeIcon = "smartphone";
+            }
+            
+            paymentDetailsContainer.innerHTML = `
+                <div class="relative">
+                    <i id="dynamic-payment-icon" data-lucide="${typeIcon}" class="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-500"></i>
+                    <input id="payment-detail-input" type="text" placeholder="${placeholder}" class="w-full pl-12 pr-4 py-3.5 bg-[#090A0F] border border-gray-800 focus:border-[#00E344] text-white placeholder-gray-500 rounded-2xl focus:outline-none transition-all text-sm font-semibold">
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        function showMainPage(pageId) {
+            const authSec = document.getElementById('auth-section');
+            const appCont = document.getElementById('app-container');
+            if (authSec) authSec.classList.add('hidden');
+            if (appCont) appCont.classList.add('hidden');
+            
+            const target = document.getElementById(pageId);
+            if (target) target.classList.remove('hidden');
+        }
+
+        let currentActivePage = 'home-page';
+
+        function navigateTo(pageId) {
+            currentActivePage = pageId;
+            // Hide all lists contents
+            document.getElementById('home-page').classList.add('hidden');
+            document.getElementById('task-page').classList.add('hidden');
+            if(document.getElementById('history-page')) document.getElementById('history-page').classList.add('hidden');
+            document.getElementById('refer-page').classList.add('hidden');
+            document.getElementById('menu-page').classList.add('hidden');
+            document.getElementById('notifications-page').classList.add('hidden');
+            
+            // Show target
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            if (pageId === 'refer-page') {
+                loadRecentMembers();
+            } else if (pageId === 'history-page') {
+                loadWithdrawalHistory();
+            }
+            
+            // Highlight nav link exactly like premium ring outline with Screenshot 1 Pink
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active', 'text-[#00E344]', 'text-[#FF007A]');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active', 'text-[#FF007A]');
+                }
+            });
+            
+            // Central Home button toggle style properties (Screenshot 1 Pink Gradient)
+            const centerBtn = document.getElementById('center-nav-home');
+            if(pageId === 'home-page') {
+                centerBtn.className = "nav-link relative z-50 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-[#FF007A] to-[#E2006A] shadow-floating border-[3px] border-[#050608] flex-col text-white transition-all scale-105 active:scale-95";
+                centerBtn.innerHTML = '<i data-lucide="home" class="w-6 h-6 text-white"></i>';
+            } else {
+                centerBtn.className = "nav-link relative z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#10121A] shadow-premium border-[3.5px] border-gray-800 flex-col text-gray-500 transition-all active:scale-95";
+                centerBtn.innerHTML = '<i data-lucide="home" class="w-6 h-6 text-gray-500"></i>';
+            }
+            lucide.createIcons();
+        }
+        window.navigateTo = navigateTo;
+
+        window.handleAndroidBack = function() {
+            const authSection = document.getElementById('auth-section');
+            if (authSection && !authSection.classList.contains('hidden')) {
+                const loginView = document.getElementById('login-view');
+                if (loginView && !loginView.classList.contains('hidden')) {
+                    // switch tab back to signup
+                    document.getElementById('auth-tab-signup').click();
+                    return "true";
+                }
+                return "false"; // let app finish
+            }
+            
+            // If in app-container check which page is open
+            if (currentActivePage !== 'home-page') {
+                navigateTo('home-page');
+                return "true";
+            }
+            return "false"; // quit application
+        };
+
+        function setupEventListeners() {
+            // Tab switched events
+            const tabSignupBtn = document.getElementById('auth-tab-signup');
+            const tabLoginBtn = document.getElementById('auth-tab-login');
+            const signupView = document.getElementById('signup-view');
+            const loginView = document.getElementById('login-view');
+
+            tabSignupBtn.addEventListener('click', () => {
+                // Active signup status tab
+                signupView.classList.remove('hidden');
+                loginView.classList.add('hidden');
+                tabSignupBtn.className = "flex-1 py-3.5 text-xs font-black uppercase rounded-xl transition-all duration-300 bg-gradient-to-r from-[#00992B] to-[#00E344] text-white shadow-md";
+                tabLoginBtn.className = "flex-1 py-3.5 text-xs font-black uppercase rounded-xl transition-all duration-300 text-gray-400 hover:text-white";
+            });
+
+            tabLoginBtn.addEventListener('click', () => {
+                // Active login status tab
+                loginView.classList.remove('hidden');
+                signupView.classList.add('hidden');
+                tabLoginBtn.className = "flex-1 py-3.5 text-xs font-black uppercase rounded-xl transition-all duration-300 bg-gradient-to-r from-[#00992B] to-[#00E344] text-white shadow-md";
+                tabSignupBtn.className = "flex-1 py-3.5 text-xs font-black uppercase rounded-xl transition-all duration-300 text-gray-400 hover:text-white";
+            });
+
+            document.getElementById('go-to-login').addEventListener('click', (e) => {
+                e.preventDefault();
+                tabLoginBtn.click();
+            });
+
+            document.getElementById('go-to-signup').addEventListener('click', (e) => {
+                e.preventDefault();
+                tabSignupBtn.click();
+            });
+            
+            document.getElementById('signup-btn').addEventListener('click', handleSignup);
+            document.getElementById('login-btn').addEventListener('click', handleLogin);
+            document.getElementById('logout-btn').addEventListener('click', handleLogout);
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.dataset.page || link.getAttribute('data-page');
+                    if (pageId) navigateTo(pageId);
+                });
+            });
+            
+            document.getElementById('notification-bell').addEventListener('click', () => { 
+                navigateTo('notifications-page'); 
+                loadNotifications(); 
+            });
+            
+            document.getElementById('copy-code-btn').addEventListener('click', copyReferralLink);
+            document.getElementById('share-btn').addEventListener('click', shareReferralLink);
+            document.getElementById('withdraw-btn').addEventListener('click', handleWithdrawal);
+            
+            const signupRefInput = document.getElementById('signup-referral');
+            const cachedRef = localStorage.getItem('pending_referral_code');
+            if (cachedRef && signupRefInput) {
+                signupRefInput.value = cachedRef;
+            }
+
+            withdrawMethodSelect.addEventListener('change', updateDynamicPaymentFields);
+        }
+
+        function getDeviceIdentifier() {
+            if (window.AndroidBridge && typeof window.AndroidBridge.getDeviceId === 'function') {
+                return window.AndroidBridge.getDeviceId();
+            }
+            // Fallback for standard browsers (preview environment)
+            let browserId = localStorage.getItem('nexora_browser_id');
+            if (!browserId) {
+                browserId = 'br_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                localStorage.setItem('nexora_browser_id', browserId);
+            }
+            return browserId;
+        }
+
+        async function handleSignup() {
+            const name = document.getElementById('signup-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const enteredReferral = document.getElementById('signup-referral').value.trim().toUpperCase();
+
+            if (!name || !email || !password) return showDialogAlert("দয়া করে সবগুলো তথ্য পূরণ করুন।", "info");
+            loader.style.display = 'flex';
+            try {
+                const deviceId = getDeviceIdentifier();
+                
+                // Enforce single active account per device rule
+                const deviceQuery = query(collection(db, "users"), where("deviceId", "==", deviceId));
+                const deviceSnapshot = await getDocs(deviceQuery);
+                if (!deviceSnapshot.empty) {
+                    loader.style.display = 'none';
+                    return showDialogAlert("দুঃখিত, এই ডিভাইস থেকে ইতিমধ্যে একটি অ্যাকাউন্ট খোলা হয়েছে! আপনি একটি ডিভাইসে একটির বেশি অ্যাকাউন্ট সচল করতে পারবেন না।", "error");
+                }
+
+                let finalReferredByCode = null;
+                // Query potential referrer first
+                let chosenReferrerCode = enteredReferral || localStorage.getItem('pending_referral_code') || '';
+                
+                if (chosenReferrerCode) {
+                    const q = query(collection(db, "users"), where("referralCode", "==", chosenReferrerCode));
+                    const querySnapshot = await getDocs(q);
+                    if (!querySnapshot.empty) {
+                        finalReferredByCode = chosenReferrerCode;
+                    } else if (enteredReferral) {
+                        loader.style.display = 'none';
+                        return showDialogAlert("প্রবেশকৃত রেফার কোডটি সঠিক নয়।", "error");
+                    }
+                }
+
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const ownReferralCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+                
+                // Referred user gets 100 coins directly. Standard registration gets 50 coins.
+                const initialSum = finalReferredByCode ? 100 : 50;
+
+                const defaultUserData = {
+                    uid: userCredential.user.uid, 
+                    name: name, 
+                    email: email,
+                    balance: initialSum, 
+                    referralCode: ownReferralCode, 
+                    referredBy: finalReferredByCode,
+                    deviceId: deviceId,
+                    lastNotificationCheck: new Date(),
+                    createdAt: serverTimestamp(),
+                    dailyAdCount: 0, 
+                    lastAdWatchDate: new Date().toISOString().split('T')[0], 
+                    isBlocked: false
+                };
+
+                const userRef = doc(db, "users", userCredential.user.uid);
+                await setDoc(userRef, defaultUserData);
+                
+                // Credit referrer immediately with 50 coins on success refer
+                if (finalReferredByCode) {
+                    const qReferrer = query(collection(db, "users"), where("referralCode", "==", finalReferredByCode));
+                    const referrerSnap = await getDocs(qReferrer);
+                    if (!referrerSnap.empty) {
+                        const referrerDoc = referrerSnap.docs[0];
+                        const referrerRef = doc(db, "users", referrerDoc.id);
+                        const referrerData = referrerDoc.data();
+                        await updateDoc(referrerRef, { 
+                            balance: (referrerData.balance || 0) + 50 
+                        });
+                    }
+                    localStorage.removeItem('pending_referral_code'); // Clean cached reference
+                }
+                
+                showDialogAlert(finalReferredByCode ? "সফলভাবে রেজিস্ট্রেশন হয়েছে! আমন্ত্রণ লিংক বোনাস হিসেবে ১০০ কয়েন আর্ন করেছেন।" : "সফলভাবে রেজিস্ট্রেশন সম্পূর্ণ হয়েছে!", "success");
+            } catch (error) {
+                showDialogAlert(error.message, "error");
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+        async function handleLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            if (!email || !password) return showDialogAlert("ইমেইল এবং পাসওয়ার্ড প্রবেশ করান।", "info");
+            loader.style.display = 'flex';
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                showDialogAlert("লগইন ব্যর্থ হয়েছে: " + error.message, "error");
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+        async function handleLogout() { 
+            await signOut(auth); 
+        }
+        
+        async function checkNewNotifications() {
+            const lastCheck = userData.lastNotificationCheck;
+            if (!lastCheck || typeof lastCheck.seconds === 'undefined') {
+                return;
+            }
+            const q = query(collection(db, "notifications"), where("createdAt", ">", lastCheck), limit(1));
+            const querySnapshot = await getDocs(q);
+            notificationDot.style.display = querySnapshot.empty ? 'none' : 'block';
+        }
+
+        async function loadNotifications() {
+            const listEl = document.getElementById('notifications-list');
+            listEl.innerHTML = `
+                <div class="flex flex-col items-center justify-center p-8 space-y-3">
+                    <div class="w-8 h-8 rounded-full border-2 border-[#00E344] border-t-transparent animate-spin"></div>
+                    <p class="text-xs text-gray-400">খোঁজা হচ্ছে...</p>
+                </div>
+            `;
+            notificationDot.style.display = 'none';
+            const q = query(collection(db, "notifications"), orderBy("createdAt", "desc"));
+            try {
+                const querySnapshot = await getDocs(q);
+                if (querySnapshot.empty) {
+                    listEl.innerHTML = `
+                        <div class="text-center py-10 space-y-2 bg-[#10121A] border border-gray-800 rounded-3xl">
+                            <i data-lucide="bell-off" class="w-10 h-10 text-gray-605 mx-auto"></i>
+                            <p class="text-xs text-gray-400 font-semibold">কোনো নোটিফিকেশন পাওয়া যায়নি।</p>
+                        </div>
+                    `;
+                    lucide.createIcons();
+                    return;
+                }
+                listEl.innerHTML = '';
+                querySnapshot.forEach(doc => {
+                    const msg = doc.data();
+                    const date = msg.createdAt ? msg.createdAt.toDate().toLocaleDateString() : 'N/A';
+                    listEl.innerHTML += `
+                        <div class="bg-[#10121A] border border-gray-800 p-4 rounded-3xl space-y-2 hover:border-[#00E344]/30 transition-all shadow-sm">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-extrabold text-[#00E344] text-xs">${msg.title}</h3>
+                                <p class="text-[9px] text-gray-400 font-bold">${date}</p>
+                            </div>
+                            <p class="text-xs text-gray-300 leading-relaxed text-left">${msg.message}</p>
+                        </div>
+                    `;
+                });
+                await updateDoc(doc(db, "users", currentUser.uid), { lastNotificationCheck: serverTimestamp() });
+            } catch (error) {
+                console.error("Error loading notifications:", error);
+                listEl.innerHTML = `
+                    <div class="bg-rose-950/20 border border-rose-900/35 p-4 rounded-3xl text-center">
+                        <p class="text-xs text-rose-500 font-semibold">নোটিফিকেশন লোড হতে ব্যর্থ হয়েছে।</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function loadRecentMembers() {
+            const listEl = document.getElementById('recent-members-list');
+            if (!listEl) return;
+            listEl.innerHTML = `
+                <div class="flex justify-center p-4">
+                    <div class="w-6 h-6 rounded-full border-2 border-[#00E344] border-t-transparent animate-spin"></div>
+                </div>
+            `;
+            try {
+                const q = query(collection(db, "users"), orderBy("createdAt", "desc"), limit(6));
+                const querySnapshot = await getDocs(q);
+                if (querySnapshot.empty) {
+                    listEl.innerHTML = '<p class="text-xs text-gray-405 text-center py-2 bg-[#10121A] border border-gray-800 rounded-3xl">কোনো সদস্য পাওয়া যায়নি</p>';
+                    return;
+                }
+                listEl.innerHTML = '';
+                querySnapshot.forEach(doc => {
+                    const u = doc.data();
+                    const photoLetter = u.name ? u.name.charAt(0).toUpperCase() : 'N';
+                    const referredByText = u.referredBy ? u.referredBy : 'None';
+                    const shortUid = u.uid ? u.uid.substring(0, 8) : 'N/A';
+                    listEl.innerHTML += `
+                        <div class="bg-[#10121A] border border-gray-800 p-3 rounded-2xl flex items-center justify-between shadow-sm">
+                            <div class="flex items-center space-x-3 text-left">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#00992B] to-[#00E344] text-black flex items-center justify-center font-black text-sm border border-white">
+                                    ${photoLetter}
+                                </div>
+                                <div class="text-left">
+                                    <div class="flex items-center space-x-1">
+                                        <span class="font-bold text-white text-xs">${u.name || 'Anonymous User'}</span>
+                                        <span class="w-3.5 h-3.5 bg-sky-500 rounded-full flex items-center justify-center border border-black text-[8px] text-white font-bold">✓</span>
+                                    </div>
+                                    <p class="text-[10px] text-gray-400">@${u.email ? u.email.split('@')[0] : 'user'} • UID: <span class="text-[#00E344]">${shortUid}</span></p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[7px] text-gray-500 font-extrabold uppercase tracking-widest">REFERRED BY</p>
+                                <p class="text-[10px] text-cyan-400 font-black">${referredByText}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (e) {
+                console.error("Error loading recent members:", e);
+                listEl.innerHTML = '<p class="text-xs text-rose-450 text-center py-2">লোড হতে সমস্যা হয়েছে</p>';
+            }
+        }
+
+        async function loadWithdrawalHistory() {
+            const historyList = document.getElementById('withdrawal-history-list');
+            historyList.innerHTML = `
+                <div class="flex flex-col items-center justify-center p-8 space-y-2">
+                    <div class="w-7 h-7 rounded-full border-2 border-[#00E344] border-t-transparent animate-spin"></div>
+                    <p class="text-xs text-gray-400 font-semibold text-center">ইতিহাস চেক করা হচ্ছে...</p>
+                </div>
+            `;
+            // Query without composite ordering to avoid demanding any custom Firestore Index setup (failed-precondition)
+            const q = query(collection(db, "withdrawals"), where("userId", "==", currentUser.uid));
+            try {
+                const querySnapshot = await getDocs(q);
+                if (querySnapshot.empty) {
+                    historyList.innerHTML = `
+                        <div class="text-center py-10 border border-gray-800 rounded-3xl space-y-1.5 bg-[#10121A]">
+                            <i data-lucide="receipt-text" class="w-8 h-8 text-gray-600 mx-auto"></i>
+                            <p class="text-xs text-gray-400 font-bold">এখনো পর্যন্ত কোনো টাকা উত্তোলন করেননি।</p>
+                        </div>
+                    `;
+                    lucide.createIcons();
+                    return;
+                }
+                
+                // Robust client-side sorting of historic requested payments desc
+                const sortedDocs = [];
+                querySnapshot.forEach(doc => sortedDocs.push(doc));
+                sortedDocs.sort((a, b) => {
+                    const tA = a.data().requestedAt ? (a.data().requestedAt.toMillis ? a.data().requestedAt.toMillis() : new Date(a.data().requestedAt).getTime()) : 0;
+                    const tB = b.data().requestedAt ? (b.data().requestedAt.toMillis ? b.data().requestedAt.toMillis() : new Date(b.data().requestedAt).getTime()) : 0;
+                    return tB - tA;
+                });
+
+                historyList.innerHTML = '';
+                sortedDocs.forEach(doc => {
+                    const request = doc.data();
+                    const status = request.status;
+                    let statusColor = 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20';
+                    let statusLabel = 'অপেক্ষারত';
+                    
+                    if (status === 'approved') {
+                        statusColor = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
+                        statusLabel = 'সফল';
+                    } else if (status === 'rejected') {
+                        statusColor = 'text-rose-450 bg-rose-500/10 border-rose-500/20';
+                        statusLabel = 'বাতিল';
+                    }
+                    
+                    const date = request.requestedAt ? request.requestedAt.toDate().toLocaleDateString() : 'N/A';
+                    historyList.innerHTML += `
+                        <div class="bg-[#10121A] border border-gray-800 p-3.5 rounded-2xl flex items-center justify-between shadow-sm hover:border-[#00E344]/20 transition-all text-left">
+                            <div class="space-y-1">
+                                <p class="font-extrabold text-[#00E344] text-xs">${request.amount} Coins - <span class="text-white">${request.method}</span></p>
+                                <p class="text-[9px] text-gray-400 font-bold">${date}</p>
+                            </div>
+                            <span class="text-[9px] font-black px-2.5 py-1 rounded-full border ${statusColor}">${statusLabel}</span>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error fetching withdrawal history: ", error);
+                historyList.innerHTML = `
+                    <div class="bg-rose-950/20 border border-rose-900/30 p-3.5 rounded-2xl text-center">
+                        <p class="text-xs text-rose-450 font-semibold">পেমেন্ট ইতিহাস লোড করা যায়নি!</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function updateBalance(amount) {
+            if (!currentUser) return;
+            const newBalance = (userData.balance || 0) + amount;
+            const userRef = doc(db, "users", currentUser.uid);
+            await updateDoc(userRef, { balance: newBalance });
+            userData.balance = newBalance;
+            updateUI();
+            await populateStatsAndRefList();
+        }
+
+        async function handleWithdrawal() {
+            const amountInput = document.getElementById('withdraw-amount');
+            const amount = parseInt(amountInput.value);
+            const method = withdrawMethodSelect.value;
+            const paymentDetailInput = document.getElementById('payment-detail-input');
+            const paymentDetail = paymentDetailInput ? paymentDetailInput.value.trim() : '';
+            const minWithdrawal = appConfig.minWithdrawal || 5000;
+
+            if (!amount || amount <= 0) return showDialogAlert("দয়া করে একটি সঠিক পরিমাণ প্রবেশ করুন।", "info");
+            if (amount < minWithdrawal) return showDialogAlert(`নূন্যতম উইথড্র হল ${minWithdrawal} কয়েন।`, "info");
+            if (amount > userData.balance) return showDialogAlert("আপনার পর্যাপ্ত ব্যালেন্স নেই!", "error");
+            if (!paymentDetail) return showDialogAlert("দয়া করে সঠিক পেমেন্ট অ্যাড্রেস/মোবাইল নম্বর প্রবেশ করুন।", "info");
+
+            loader.style.display = 'flex';
+            try {
+                await updateBalance(-amount);
+                await addDoc(collection(db, "withdrawals"), {
+                    userId: currentUser.uid, userName: userData.name, userEmail: userData.email,
+                    amount: amount, method: method, paymentDetail: paymentDetail, status: "pending", requestedAt: serverTimestamp()
+                });
+                showDialogAlert("আপনার টাকা উত্তোলনের রিকোয়েস্ট জমা হয়েছে!", "success");
+                amountInput.value = '';
+                paymentDetailInput.value = '';
+                await populateStatsAndRefList();
+                loadWithdrawalHistory();
+            } catch (error) {
+                showDialogAlert("রিকোয়েস্ট জমার সময় ত্রুটি: " + error.message, "error");
+                await updateBalance(amount); // Refund if error
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+        function copyReferralLink() {
+            const botUsername = appConfig.telegramBotUsername || 'nexorabdt_bot';
+            const inviteLink = `https://t.me/${botUsername}?start=${userData.referralCode}`;
+            navigator.clipboard.writeText(inviteLink).then(() => {
+                showDialogAlert("আপনার রেফারেল লিংক কপি করা হয়েছে!", "success");
+            }).catch(err => {
+                showDialogAlert("লিংক কপি করা যায়নি।", "error");
+            });
+        }
+        
+        function shareReferralLink() {
+            const botUsername = appConfig.telegramBotUsername || 'nexorabdt_bot';
+            const inviteLink = `https://t.me/${botUsername}?start=${userData.referralCode}`;
+            const text = `Join NexoraBDT and earn real money online instantly! Use my specialized referral invitation link to grab a massive 100 Coins join-bonus right now: ${inviteLink}`;
+            if (navigator.share) {
+                navigator.share({ title: 'NexoraBDT Earning Community', text: text, url: inviteLink })
+                    .catch((error) => console.error("Share failed:", error));
+            } else {
+                copyReferralLink();
+            }
+        }
+
+        window.claimReward = async function(taskType) {
+            const today = new Date().toISOString().split('T')[0];
+            const userRef = doc(db, "users", currentUser.uid);
+
+            if (userData.lastAdWatchDate !== today) {
+                await updateDoc(userRef, { dailyAdCount: 0, lastAdWatchDate: today });
+                userData.dailyAdCount = 0;
+                userData.lastAdWatchDate = today;
+            }
+
+            if (userData.dailyAdCount >= (appConfig.dailyAdLimit || 10)) {
+                return showDialogAlert("আপনি আজকের সর্বোচ্চ লিমিটে পৌঁছে গেছেন!", "info");
+            }
+            
+            if (typeof window.show_11079278 !== 'function') {
+                return showDialogAlert("বিজ্ঞাপন নেটওয়ার্ক রেডি হচ্ছে। কিছুক্ষণ পর চেষ্টা করুন।", "info");
+            }
+            
+            let adPromise;
+            loader.style.display = 'flex';
+            try {
+                 switch(taskType) {
+                    case 'interstitial': adPromise = window.show_11079278(); break;
+                    case 'popup': adPromise = window.show_11079278('pop'); break;
+                    case 'inApp': adPromise = window.show_11079278({ type: 'inApp', inAppSettings: { frequency: 2, capping: 0.1, interval: 30, timeout: 5, everyPage: false } }); break;
+                    case 'miniApp': adPromise = window.show_11079278(); break;
+                    default: return;
+                }
+                
+                await adPromise;
+
+                const newCount = (userData.dailyAdCount || 0) + 1;
+                await updateDoc(userRef, { dailyAdCount: newCount });
+                userData.dailyAdCount = newCount;
+                
+                let rewardAmount = 0;
+                if (taskType === 'miniApp') rewardAmount = 100;
+                else if (taskType !== 'inApp') rewardAmount = 50;
+
+                if (rewardAmount > 0) {
+                    await updateBalance(rewardAmount);
+                    showDialogAlert(`অভিনন্দন! আপনি বিজ্ঞাপনের জন্য ${rewardAmount} কয়েন জিতেছেন।`, "success");
+                }
+                updateAdsLeftCount();
+
+            } catch(e) {
+                console.error("Ad error:", e);
+                showDialogAlert('এড ওপেন হতে সমস্যা হয়েছে। আবার চেষ্টা করুন।', 'error');
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+        function showDialogAlert(message, type = 'info') {
+            const alertEl = document.getElementById('custom-alert');
+            const messageEl = document.getElementById('alert-message');
+            const iconContainer = document.getElementById('alert-icon-container');
+            const iconEl = document.getElementById('alert-icon');
+            
+            messageEl.textContent = message;
+            
+            if (type === 'success') {
+                iconContainer.className = "w-14 h-14 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/20";
+                iconEl.setAttribute('data-lucide', 'check');
+                iconEl.className = "w-7 h-7 text-[#00E344]";
+            } else if (type === 'error') {
+                iconContainer.className = "w-14 h-14 bg-rose-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-rose-500/20";
+                iconEl.setAttribute('data-lucide', 'alert-triangle');
+                iconEl.className = "w-7 h-7 text-rose-500 animate-bounce";
+            } else {
+                iconContainer.className = "w-14 h-14 bg-cyan-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-cyan-500/20 animate-pulse";
+                iconEl.setAttribute('data-lucide', 'info');
+                iconEl.className = "w-7 h-7 text-cyan-400";
+            }
+            
+            alertEl.classList.remove('hidden');
+            lucide.createIcons();
+            
+            document.getElementById('alert-ok-btn').onclick = () => {
+                alertEl.classList.add('hidden');
+            };
+        }
+        window.showAlert = (msg) => showDialogAlert(msg, "info");
+
+    </script>
+</body>
+</html>
+
